@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Accounts\ChangePassword\Output\" />
+    <Folder Include="Accounts\ForgetPassword\Output\" />
+    <Folder Include="Accounts\RegisterUser\Output\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.14" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\CoreGuide.Common.Entities\CoreGuide.Common.Entities.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\BLL\CoreGuide.BLL\CoreGuide.BLL.Business.csproj" />
+    <ProjectReference Include="..\..\DAL\CoreGuide.DAL.Context\CoreGuide.DAL.Context.csproj" />
+    <ProjectReference Include="..\..\DAL\CoreGuide.DAL.Repository\CoreGuide.DAL.Repository.csproj" />
+  </ItemGroup>
+
+</Project>
