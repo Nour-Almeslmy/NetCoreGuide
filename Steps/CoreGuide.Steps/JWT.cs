@@ -40,7 +40,9 @@ namespace CoreGuide.Steps
             app.UseAuthorization();
             ";
         /// 4) Create new jwt token against the same validation parameters, see TokenService in business
-        /// 5)
+        /// 5) Use authorization filter, which can be used with policy or roles
+        const string policyAuth = @"[Authorize(Policy = Strings.Policies.User)]";
+        const string roleAuth = @"[Authorize(Roles = Strings.Policies.Admin)]";
         #endregion
 
 

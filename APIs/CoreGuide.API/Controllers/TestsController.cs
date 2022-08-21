@@ -1,6 +1,7 @@
 ﻿using CoreGuide.BLL.Models.ConfigurationSettings;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System;
 using System.Threading;
@@ -14,11 +15,13 @@ namespace CoreGuide.API.Controllers
     {
         private readonly AllowedFileSettings _options;
         private readonly AllowedFileSettings _optionsSnapshot;
+        private readonly ILogger<TestsController> _logger;
 
-        public TestsController(IOptionsSnapshot<AllowedFileSettings> optionsSnapshot, IOptions<AllowedFileSettings> options)
+        public TestsController(IOptionsSnapshot<AllowedFileSettings> optionsSnapshot, IOptions<AllowedFileSettings> options, ILogger<TestsController> logger)
         {
             _options = options.Value;
             _optionsSnapshot = optionsSnapshot.Value;
+            _logger = logger;
         }
 
         [HttpGet("sync")]
@@ -169,7 +172,34 @@ namespace CoreGuide.API.Controllers
         public IActionResult Config()
         {
             var result = $"IOptions: {_options.MaximumImageSize}\r\nIOptionsSnapshot: {_optionsSnapshot.MaximumImageSize}";
-            return Ok(result);   
+            return Ok(result);
+        }
+
+        [HttpGet("log")]
+        public IActionResult Log()
+        {
+            _logger.LogTrace("Trace msg\r\n");
+            _logger.LogDebug("Debug msg\r\n");
+            _logger.LogInformation("Information msg\r\n");
+            _logger.LogWarning("Warning msg\r\n");
+            return Ok();
+        }
+
+        [HttpGet("logex")]
+        public IActionResult Logex()
+        {
+            try
+            {
+
+                throw new AggregateException("Errooooooooooooooooooooooooooooooooooooooor",
+                    new ArgumentNullException("first inner excpetion",
+                    new ArgumentException("second exception")));
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, ex.Message);
+                return BadRequest();
+            }
         }
 
     }
