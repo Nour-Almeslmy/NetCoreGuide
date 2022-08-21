@@ -33,7 +33,8 @@ namespace CoreGuide.Steps
                 });";
 
         /// You can provide two routing paths by adding another RouteAttribute
-        /// 
+        /// Action methods on controllers annotated with ApiControllerAttribute must be attribute routed, 
+        /// so the actions are inaccessible via conventional routes defined in UseMvc or by UseMvcWithDefaultRoute in Startup.Configure.
         #endregion
 
         #endregion

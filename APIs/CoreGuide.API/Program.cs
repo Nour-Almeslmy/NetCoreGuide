@@ -31,7 +31,6 @@ namespace CoreGuide.API
             {
                 Log.CloseAndFlush();
             }
-            CreateHostBuilder(args).Build().Run();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>

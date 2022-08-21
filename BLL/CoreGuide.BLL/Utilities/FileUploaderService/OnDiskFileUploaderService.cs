@@ -22,7 +22,6 @@ namespace CoreGuide.BLL.Business.Utilities.FileUploaderService
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly IContextAccessor _contextAccessor;
 
-        //private readonly ILogger _logger = Log.Logger.ForContext<OnDiskFileStorageService>();
 
         public OnDiskFileUploaderService(
             IWebHostEnvironment env,

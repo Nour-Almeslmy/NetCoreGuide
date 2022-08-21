@@ -41,6 +41,17 @@ namespace CoreGuide.API
                 option.ForwardedHeaders = Microsoft.AspNetCore.HttpOverrides.ForwardedHeaders.XForwardedFor;
             });
 
+            services.AddCors(opts =>
+            {
+                opts.AddDefaultPolicy(policy =>
+                {
+                    var allowedOrigins = Configuration.GetSection(APIStrings.ConfigurationsSections.AllowedOrigins).Get<string[]>();
+                    policy
+                        .WithOrigins(allowedOrigins)
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
+                });
+            });
 
             services.AddSwaggerGen(options =>
             {
@@ -77,7 +88,7 @@ namespace CoreGuide.API
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseRouting();
-
+            app.UseCors();
             app.UseAuthentication();
 
             app.UseAuthorization();
@@ -87,6 +98,7 @@ namespace CoreGuide.API
                 endpoints.MapControllers();
                 //endpoints.MapControllerRoute("default", "api/{controller}/{action}/{id?}");
             });
+
         }
     }
 }

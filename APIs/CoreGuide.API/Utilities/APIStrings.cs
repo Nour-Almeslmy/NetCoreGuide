@@ -9,6 +9,7 @@
             public const string AllowedFileSettings = "AllowedFileSettings";
             public const string AccessTokenSettings = "AccessTokenSettings";
             public const string RefreshTokenSettings = "RefreshTokenSettings";
+            public const string AllowedOrigins = "AllowedOrigins";
         }
     }
 }

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace CoreGuide.API.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    //[Route("api/[controller]")]
     public class TestsController : ControllerBase
     {
         private readonly AllowedFileSettings _options;
