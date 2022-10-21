@@ -21,7 +21,11 @@ namespace CoreGuide.API.Controllers
         {
             _accountsManager = accountsManager;
         }
-
+        /// <summary>
+        /// Register new user
+        /// </summary>
+        /// <param name="input">RegisterUserInput</param>
+        /// <returns></returns>
         [HttpPost("Register")]
         [AllowAnonymous]
         public async Task<IActionResult> Register([FromForm] RegisterUserInput input)

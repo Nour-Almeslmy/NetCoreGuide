@@ -33,9 +33,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Steps", "Steps", "{26CE967B
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoreGuide.ConsoleApp", "Tasks\CoreGuide.Task\CoreGuide.ConsoleApp.csproj", "{776C5D5F-0549-42BC-9EF3-7A9E402F3AA9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreGuide.Steps", "Steps\CoreGuide.Steps\CoreGuide.Steps.csproj", "{F93199A5-3789-4503-93FD-B0ECC3B3681C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoreGuide.Steps", "Steps\CoreGuide.Steps\CoreGuide.Steps.csproj", "{F93199A5-3789-4503-93FD-B0ECC3B3681C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoreGuide.DAL.Context", "DAL\CoreGuide.DAL.Context\CoreGuide.DAL.Context.csproj", "{A69E9DC3-F863-49F0-A8CE-06BB14954CC6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{55349F81-A61D-4393-BC80-33F17E5C65F1}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

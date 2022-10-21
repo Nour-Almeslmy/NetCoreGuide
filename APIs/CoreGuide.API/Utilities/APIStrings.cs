@@ -10,6 +10,7 @@
             public const string AccessTokenSettings = "AccessTokenSettings";
             public const string RefreshTokenSettings = "RefreshTokenSettings";
             public const string AllowedOrigins = "AllowedOrigins";
+            public const string Localization = "LocalizationSettings";
         }
     }
 }

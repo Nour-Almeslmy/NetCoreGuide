@@ -7,7 +7,9 @@
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("Downloading File");
             Console.ForegroundColor = ConsoleColor.White;
+            PrintCurrentThread("before download file");
             await Task.Delay(3000);
+            PrintCurrentThread("after download file");
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("Downloading Finished");
             Console.ForegroundColor = ConsoleColor.White;
@@ -19,7 +21,9 @@
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine("Connecting to DB");
             Console.ForegroundColor = ConsoleColor.White;
+            PrintCurrentThread("before db");
             await Task.Delay(2000);
+            PrintCurrentThread("after db");
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine("Name fetched");
             Console.ForegroundColor = ConsoleColor.White;
@@ -56,5 +60,12 @@
             return "Cold";
         }
 
+
+
+        static void PrintCurrentThread(string process)
+        {
+            Console.WriteLine(process + Thread.CurrentThread.ManagedThreadId.ToString());
+        }
     }
+
 }
