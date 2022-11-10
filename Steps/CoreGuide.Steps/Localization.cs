@@ -42,6 +42,9 @@ namespace CoreGuide.Steps
             app.UseRequestLocalization(requestLocalizationOptions.Value);";
 
         /// see Json Based Localization
+        /// 
+        /// 
+        
         /// References
         /// https://docs.microsoft.com/en-us/aspnet/core/fundamentals/localization?view=aspnetcore-6.0
     }

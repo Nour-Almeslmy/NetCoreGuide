@@ -7,6 +7,7 @@ using CoreGuide.Common.Entities.ConfigurationSettings;
 using CoreGuide.Common.Utilities.OutputFiller;
 using CoreGuide.Common.Utilities.Utilities;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -21,10 +22,9 @@ namespace CoreGuide.Common.Utilities
             services.AddScoped<IOutputFiller, OutputFiller.OutputFiller>();
         }
 
-        public static void AddJWTAuthorizationServices(this IServiceCollection services)
+        public static void AddJWTAuthorizationServices(this IServiceCollection services,IConfiguration configuration)
         {
-            var provider = services.BuildServiceProvider();
-            var accessTokenSettings = provider.GetRequiredService<IOptionsSnapshot<AccessTokenSettings>>().Value;
+            var accessTokenSettings = configuration.GetSection(Strings.ConfigurationsSections.AccessTokenSettings).Get<AccessTokenSettings>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {

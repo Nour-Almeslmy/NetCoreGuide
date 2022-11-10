@@ -38,7 +38,8 @@ namespace CoreGuide.API
                 .UseSerilog()
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseStartup<Startup>()
+                    webBuilder
+                    .UseStartup<Startup>()
                     //.UseContentRoot(Directory.GetCurrentDirectory())
                     .UseWebRoot("wwwroot");
                 });

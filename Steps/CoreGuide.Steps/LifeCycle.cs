@@ -8,5 +8,6 @@ namespace CoreGuide.Steps
 {
     internal class LifeCycle
     {
+        /// Request goes to 
     }
 }

@@ -194,6 +194,10 @@ namespace CoreGuide.Common.Utilities
             public const string Admin = "Admin";
             public const string User = "User";
         }
+        public struct ConfigurationsSections
+        {
+            public const string AccessTokenSettings = "AccessTokenSettings";
+        }
     }
 }
 

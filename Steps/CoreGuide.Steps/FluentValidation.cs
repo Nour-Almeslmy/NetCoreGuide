@@ -26,7 +26,7 @@ namespace CoreGuide.Steps
         #endregion
 
         #region To create new custom validator for specific type
-        /// 1) Create new generic class by implementing ": PropertyValidator<T, IType>"
+        /// 1) Create new generic class by implementing ": PropertyValidator<T, IType>",ex "FileContentTypeValidator"
         /// 2) if it takes any parameters, add it to the CTOR
         /// 3) Add new extenion method to "IRuleBuilder<T, IType>", for example
         const string example = @"        

@@ -5,6 +5,7 @@ using CoreGuide.Common.Entities.ConfigurationSettings;
 using CoreGuide.Common.Utilities;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -116,12 +117,14 @@ namespace CoreGuide.API
             #endregion
 
             services.AddBusinessServices(connectionString);
-            services.AddJWTAuthorizationServices();
+            services.AddJWTAuthorizationServices(Configuration);
             services.AddLocalizationSettings(Configuration);
+
+            services.AddTransient<ConsoleLoggerMiddleWare>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public async void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -129,6 +132,22 @@ namespace CoreGuide.API
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "CoreGuide.API v1"));
             }
+
+            #region custom middlewares
+            // app.Use(async (context, next) =>
+            // {
+            //    Console.WriteLine("Before");
+            //    await next();
+            //    Console.WriteLine("After");
+            // });
+
+            // app.Run(async context => await context.Response.WriteAsync("Terminal delegate")); 
+            //app.UseMiddleware<ConsoleLoggerMiddleWare>();
+
+            //app.Map("/Map", MapHandler);
+            //app.MapWhen(context => context.Request.Query.ContainsKey("mapwhen"), HandleCustomQuery);
+            //app.UseWhen(context => context.Request.Query.ContainsKey("mapwhen"), HandleCustomQuery);
+            #endregion
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
@@ -146,6 +165,26 @@ namespace CoreGuide.API
                 //endpoints.MapControllerRoute("default", "api/{controller}/{action}/{id?}");
             });
 
+        }
+
+        private void HandleCustomQuery(IApplicationBuilder app)
+        {
+            app.Use(async (context, next) =>
+            {
+                Console.WriteLine("Before HandleCustomQuery");
+                await next();
+                Console.WriteLine("After HandleCustomQuery");
+            });
+        }
+
+        private void MapHandler(IApplicationBuilder app)
+        {
+            app.Run(async context =>
+            {
+                Console.WriteLine("MapHandler");
+                await context.Response.WriteAsync("map handler");
+            }
+            );
         }
     }
 }
