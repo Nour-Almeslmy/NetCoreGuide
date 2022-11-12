@@ -43,6 +43,7 @@ namespace CoreGuide.API
             services.AddDataProtection();
             services.AddHttpContextAccessor();
             services.AddHttpClient();
+            services.AddDistributedMemoryCache();
             services.Configure<ForwardedHeadersOptions>(option =>
             {
                 option.ForwardedHeaders = Microsoft.AspNetCore.HttpOverrides.ForwardedHeaders.XForwardedFor;
@@ -118,9 +119,9 @@ namespace CoreGuide.API
             services.Configure<RefreshTokenSettings>(Configuration.GetSection(APIStrings.ConfigurationsSections.RefreshTokenSettings));
             #endregion
 
+            services.AddLocalizationSettings(Configuration);
             services.AddBusinessServices(connectionString);
             services.AddJWTAuthorizationServices(Configuration);
-            services.AddLocalizationSettings(Configuration);
 
             services.AddTransient<ConsoleLoggerMiddleWare>();
         }

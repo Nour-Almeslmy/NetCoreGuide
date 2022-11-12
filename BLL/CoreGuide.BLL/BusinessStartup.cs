@@ -9,6 +9,7 @@ using CoreGuide.BLL.Business.Manager.Resources;
 using CoreGuide.BLL.Business.Utilities.ContextAccessor;
 using CoreGuide.BLL.Business.Utilities.FileUploaderService;
 using CoreGuide.BLL.Business.Utilities.GuideFillerService;
+using CoreGuide.BLL.Business.Utilities.JSONLocalizer;
 using CoreGuide.BLL.Business.Utilities.MapperService;
 using CoreGuide.BLL.Business.Utilities.TokenService;
 using CoreGuide.BLL.Business.Utilities.ValidationService;
@@ -21,6 +22,7 @@ using CoreGuide.DAL.Repository;
 using FluentValidation.AspNetCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Localization;
 
 namespace CoreGuide.BLL.Business
 {
@@ -43,6 +45,7 @@ namespace CoreGuide.BLL.Business
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IContextAccessor, ContextAccessor>();
             services.AddScoped<IFileUploaderService, OnDiskFileUploaderService>();
+            services.AddSingleton<IStringLocalizerFactory, JsonStringLocalizerFactory>();
             #endregion
 
             #region Validators

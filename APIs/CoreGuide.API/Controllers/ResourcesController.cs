@@ -21,5 +21,10 @@ namespace CoreGuide.API.Controllers
         {
             return Ok(_resourcesManager.SayHello());
         }
+        [HttpGet("JSON")]
+        public IActionResult SayHelloJSON()
+        {
+            return Ok(_resourcesManager.SayHelloJSON());
+        }
     }
 }

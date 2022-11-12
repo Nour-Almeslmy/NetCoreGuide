@@ -6,6 +6,11 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <Content Remove="Resources\ar.json" />
+	  <Content Remove="Resources\en.json" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.1">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -28,6 +33,8 @@
 
 	<ItemGroup>
 	  <None Include="..\..\.editorconfig" Link=".editorconfig" />
+	  <None Include="Resources\ar.json" />
+	  <None Include="Resources\en.json" />
 	</ItemGroup>
 
 	<ProjectExtensions>

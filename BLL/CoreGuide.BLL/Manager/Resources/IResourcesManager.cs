@@ -3,5 +3,6 @@
     public interface IResourcesManager
     {
         string SayHello();
+        string SayHelloJSON();
     }
 }
