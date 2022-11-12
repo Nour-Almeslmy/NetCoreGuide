@@ -1,4 +1,6 @@
 ﻿using CoreGuide.API.Utilities;
+using CoreGuide.API.Utilities.Filters;
+using CoreGuide.API.Utilities.Middlewares;
 using CoreGuide.BLL.Business;
 using CoreGuide.BLL.Models.ConfigurationSettings;
 using CoreGuide.Common.Entities.ConfigurationSettings;
@@ -6,20 +8,15 @@ using CoreGuide.Common.Utilities;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
 using System;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
 
 namespace CoreGuide.API
 {
@@ -36,7 +33,13 @@ namespace CoreGuide.API
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddControllers();
+            services.AddControllers(options =>
+            {
+                // Global registeration
+                // options.Filters.Add(new ConsoleLogFilterAttribute());
+                // options.Filters.AddService<SerilogFilterAttribute>();
+            });
+            services.AddTransient<SerilogFilterAttribute>();
             services.AddDataProtection();
             services.AddHttpContextAccessor();
             services.AddHttpClient();
@@ -44,7 +47,6 @@ namespace CoreGuide.API
             {
                 option.ForwardedHeaders = Microsoft.AspNetCore.HttpOverrides.ForwardedHeaders.XForwardedFor;
             });
-
             services.AddCors(opts =>
             {
                 opts.AddDefaultPolicy(policy =>

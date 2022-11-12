@@ -28,7 +28,6 @@ namespace CoreGuide.BLL.Business.Manager.Accounts
         private readonly IGuideFillerService _guideFillerService;
         private readonly ITokenService _tokenService;
         private readonly IMapperService _mapperService;
-        private readonly IGuideUnitOfWork _guideUnitOfWork;
         private readonly IFileUploaderService _fileUploaderService;
         private readonly IEmployeeRepository _employeeRepository;
         #endregion
@@ -39,7 +38,6 @@ namespace CoreGuide.BLL.Business.Manager.Accounts
             IGuideFillerService guideFillerService,
             ITokenService tokenService,
             IMapperService mapperService,
-            IGuideUnitOfWork guideUnitOfWork,
             IFileUploaderService fileUploaderService,
             IEmployeeRepository employeeRepository
             )
@@ -48,7 +46,6 @@ namespace CoreGuide.BLL.Business.Manager.Accounts
             _guideFillerService = guideFillerService;
             _tokenService = tokenService;
             _mapperService = mapperService;
-            _guideUnitOfWork = guideUnitOfWork;
             _fileUploaderService = fileUploaderService;
             _employeeRepository = employeeRepository;
         }

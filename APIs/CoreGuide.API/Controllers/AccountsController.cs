@@ -33,9 +33,9 @@ namespace CoreGuide.API.Controllers
             var output = await _accountsManager.RegisterEmployee(input);
             return Ok(output);
         }
-
         [HttpPost("SignIn")]
         [AllowAnonymous]
+        //[CoreGuide.API.Utilities.Filters.ConsoleLogFilter]
         public async Task<IActionResult> SignIn([FromBody] SignInInput input, CancellationToken cancellationToken)
         {
             var output = await _accountsManager.SignIn(input, cancellationToken);

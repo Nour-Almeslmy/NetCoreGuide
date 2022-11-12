@@ -9,7 +9,6 @@ namespace CoreGuide.Steps
     internal class Logging
     {
 
-        #region Serilog
 
 
         #region Steps
@@ -25,17 +24,17 @@ namespace CoreGuide.Steps
                 .ReadFrom.Configuration(configuration)
                 .CreateLogger();";
         /// 3) Create Serilog section in appsettings
-            #region Configure sub sections
-            /// 1) Using ==> array of used packages
-            /// 2) MinimumLevel ==> set default logging level
-            /// 3) Override ==> What to write using serilog from other sources.
-            /// 4) WriteTo ==> configure the logging target  
-            /// 5) "Write:Async" or "Name":"Async" in "WriteTo" section to use asyncronous logging
-            /// 6) Args, configure in ["Name":"Async"] ==> used in async logging to configure logging targets
-            /// 7) Name ==> write the target type ex: console, file.
-            /// 8) Enrich ==> array of enrichers
-            /// 9) Properties ==> json of properties
-            #endregion
+        #region Configure sub sections
+        /// 1) Using ==> array of used packages
+        /// 2) MinimumLevel ==> set default logging level
+        /// 3) Override ==> What to write using serilog from other sources.
+        /// 4) WriteTo ==> configure the logging target  
+        /// 5) "Write:Async" or "Name":"Async" in "WriteTo" section to use asyncronous logging
+        /// 6) Args, configure in ["Name":"Async"] ==> used in async logging to configure logging targets
+        /// 7) Name ==> write the target type ex: console, file.
+        /// 8) Enrich ==> array of enrichers
+        /// 9) Properties ==> json of properties
+        #endregion
         #endregion
 
         #region Enrichers
@@ -45,6 +44,19 @@ namespace CoreGuide.Steps
         #region Properties
         /// Adding custom properties to the logs.
         #endregion
+
+        #region Usage
+        /// 1) Inject ILogger of Microsoft.Extensions.Logging as you have overriden the system logger
+        /// 2) Use "Log.Logger.ForContext" to set the logger, for context is used to add more props especially for this context
+        const string forContextExample = " _logger = Log.Logger.ForContext<SerilogFilterAttribute>(Serilog.Events.LogEventLevel.Information,\"Filter\",this);";
+        #endregion
+
+        #region References
+        /// https://benfoster.io/blog/serilog-best-practices/#standard-serilog-enrichers
+        /// https://github.com/serilog/serilog-sinks-file
+        /// https://github.com/serilog/serilog/wiki/Formatting-Output
+        /// https://github.com/serilog/serilog/wiki/Enrichment
+        /// 
         #endregion
     }
 }

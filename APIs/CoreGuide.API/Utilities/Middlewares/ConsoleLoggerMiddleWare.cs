@@ -2,7 +2,7 @@
 using System;
 using System.Threading.Tasks;
 
-namespace CoreGuide.API.Utilities
+namespace CoreGuide.API.Utilities.Middlewares
 {
     public class ConsoleLoggerMiddleWare : IMiddleware
     {

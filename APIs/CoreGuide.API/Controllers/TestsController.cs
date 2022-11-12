@@ -1,4 +1,5 @@
-﻿using CoreGuide.BLL.Models.ConfigurationSettings;
+﻿using CoreGuide.API.Utilities.Filters;
+using CoreGuide.BLL.Models.ConfigurationSettings;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -16,12 +17,28 @@ namespace CoreGuide.API.Controllers
         private readonly AllowedFileSettings _options;
         private readonly AllowedFileSettings _optionsSnapshot;
         private readonly ILogger<TestsController> _logger;
+        private readonly Serilog.ILogger _serilogger;
 
-        public TestsController(IOptionsSnapshot<AllowedFileSettings> optionsSnapshot, IOptions<AllowedFileSettings> options, ILogger<TestsController> logger)
+        public TestsController(
+            IOptionsSnapshot<AllowedFileSettings> optionsSnapshot,
+            IOptions<AllowedFileSettings> options,
+            ILogger<TestsController> logger)
         {
             _options = options.Value;
             _optionsSnapshot = optionsSnapshot.Value;
             _logger = logger;
+            _serilogger = Serilog.Log.Logger.ForContext<TestsController>();
+        }
+        [ServiceFilter(typeof(SerilogFilterAttribute))]
+        //[TypeFilter(typeof(SerilogFilterAttribute),Arguments = new object[] {"Action"})]
+        [HttpGet("serlilog")]
+        public IActionResult SerilogTest()
+        {
+            _logger.LogError(new NullReferenceException("Null"), "Error null");
+            _logger.LogDebug("Debug");
+            _serilogger.Error(new NullReferenceException("Serilog Null"), "Serilog Error null");
+            _serilogger.Debug("Serilog Debug");
+            return Ok();
         }
 
         [HttpGet("sync")]
@@ -133,6 +150,7 @@ namespace CoreGuide.API.Controllers
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("some work after");
             var number = await numberTask;
+            Console.WriteLine("after work");
             Console.WriteLine($"Thread id in the endpoint after execution is: {Thread.CurrentThread.ManagedThreadId}");
             Console.ForegroundColor = ConsoleColor.White;
             return Ok(number);
@@ -148,6 +166,7 @@ namespace CoreGuide.API.Controllers
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("some work after");
             await numberTask;
+            Console.WriteLine("after work");
             Console.WriteLine($"Thread id in the endpoint after execution is: {Thread.CurrentThread.ManagedThreadId}");
             Console.ForegroundColor = ConsoleColor.White;
             return Ok();
