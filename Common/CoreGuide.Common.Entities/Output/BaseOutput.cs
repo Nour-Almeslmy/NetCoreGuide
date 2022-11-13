@@ -6,12 +6,15 @@ using System.Threading.Tasks;
 
 namespace CoreGuide.Common.Entities.Output
 {
-    public class BaseOutput
+
+    //public record BaseOutput(int Age,string ErrorDescription, string ErrorMessage, string InternalError, string InternalErrorDescription) { }
+
+    public record BaseOutput
     {
-        public int ErrorCode { get; set; }
-        public string ErrorDescription { get; set; }
-        public string ErrorMessage { get; set; }
-        public string InternalError { get; set; }
-        public string InternalErrorDescription { get; set; }
+        public int ErrorCode { get; init; }
+        public string ErrorDescription { get; init; }
+        public string ErrorMessage { get; init; }
+        public string InternalError { get; init; }
+        public string InternalErrorDescription { get; init; }
     }
 }

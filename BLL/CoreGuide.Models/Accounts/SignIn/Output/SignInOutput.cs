@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace CoreGuide.BLL.Models.Accounts.SignIn.Output
 {
-    public class SignInOutput : BaseOutput
+    public record SignInOutput : BaseOutput
     {
-        public string AccessToken { get; set; }
-        public string RefreshToken { get; set; }
+        public string AccessToken { get; init; }
+        public string RefreshToken { get; init; }
     }
 }

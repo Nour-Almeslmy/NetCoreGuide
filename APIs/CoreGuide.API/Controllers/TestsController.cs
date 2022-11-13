@@ -17,7 +17,6 @@ namespace CoreGuide.API.Controllers
     {
         private readonly AllowedFileSettings _options;
         private readonly AllowedFileSettings _optionsSnapshot;
-        static HttpClient _client = new HttpClient();
 
         public TestsController(
             IOptionsSnapshot<AllowedFileSettings> optionsSnapshot,
@@ -26,7 +25,7 @@ namespace CoreGuide.API.Controllers
             _options = options.Value;
             _optionsSnapshot = optionsSnapshot.Value;
         }
-        
+
 
         [HttpGet("sync")]
         public IActionResult Sync()
@@ -163,6 +162,7 @@ namespace CoreGuide.API.Controllers
         {
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine($"Thread id in the method is: {Thread.CurrentThread.ManagedThreadId}");
+            Console.ForegroundColor = ConsoleColor.White;
             return await Task.Run(() =>
             {
                 return 2;
@@ -172,51 +172,15 @@ namespace CoreGuide.API.Controllers
         {
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine($"Thread id in the method is: {Thread.CurrentThread.ManagedThreadId}");
-            return Task.Delay(3000);
+            Console.ForegroundColor = ConsoleColor.White;
+            return Task.Delay(5000);
         }
+
         [HttpGet("config")]
         public IActionResult Config()
         {
             var result = $"IOptions: {_options.MaximumImageSize}\r\nIOptionsSnapshot: {_optionsSnapshot.MaximumImageSize}";
             return Ok(result);
-        }
-
-        [HttpGet("Bad")]
-        public IActionResult Bad()
-        {
-            var result = BadExample();
-            return Ok(result);
-        }
-
-        string BadExample()
-        {
-            var message = BadGet().GetAwaiter().GetResult();
-            return message;
-        }
-
-        async Task<string> BadGet()
-        {
-            var result = await _client.GetStringAsync("https://www.google.com");
-            return result;
-        }
-
-        [HttpGet("Good")]
-        public IActionResult Good()
-        {
-            var result = GoodExample();
-            return Ok(result);
-        }
-
-        string GoodExample()
-        {
-            var message = GoodGet().GetAwaiter().GetResult();
-            return message;
-        }
-
-        async Task<string> GoodGet()
-        {
-            var result = await _client.GetStringAsync("https://www.google.com").ConfigureAwait(false);
-            return result;
         }
 
     }

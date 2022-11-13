@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CoreGuide.BLL.Models.Accounts.ConfirmOTP.Input
 {
-    public class ConfirmOTPInput
+    public record ConfirmOTPInput
     {
 
         public string Code { get; set; }

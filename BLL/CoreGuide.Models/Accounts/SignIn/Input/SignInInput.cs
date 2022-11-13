@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CoreGuide.BLL.Models.Accounts.SignIn.Input
 {
-    public class SignInInput
+    public record SignInInput
     {
         public string UserName { get; set; }
         public string Password { get; set; }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CoreGuide.BLL.Models.Accounts.RegisterUser.Input
 {
-    public class RegisterUserInput
+    public record RegisterUserInput
     {
         public string Name { get; set; }
         public string Email { get; set; }

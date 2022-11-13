@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CoreGuide.BLL.Models.Accounts.ChangePassword.Input
 {
-    public class ChangePasswordInput
+    public record ChangePasswordInput
     {
         public string CurrentPassword { get; set; }
         public string NewPassword { get; set; }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CoreGuide.BLL.Models.Accounts.ForgetPassword.Input
 {
-    public class ForgetPasswordInput
+    public record ForgetPasswordInput
     {
         public string UserName { get; set; }
     }

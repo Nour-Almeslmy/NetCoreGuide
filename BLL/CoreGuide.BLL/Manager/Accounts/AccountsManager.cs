@@ -103,8 +103,7 @@ namespace CoreGuide.BLL.Business.Manager.Accounts
                 return _guideFillerService.FillOutput<SignInOutput>(GuideErrorCodes.InvalidToken, BusinessStrings.Resources.ErrorMessagesKeys.RefreshTokenFailed);
 
             var output = _guideFillerService.FillSuccessOutput<SignInOutput>(BusinessStrings.Resources.ErrorMessagesKeys.SignInSuccess);
-            output.AccessToken = accessToken;
-            output.RefreshToken = result.refreshToken.Token;
+            output = output with { AccessToken = accessToken , RefreshToken = result.refreshToken.Token};
             return output;
         }
         #endregion
@@ -133,9 +132,8 @@ namespace CoreGuide.BLL.Business.Manager.Accounts
             }
             var employee = await _employeeRepository.GetUserByIdWithRoleAsync(result.refreshToken.EmployeeId, cancellationToken);
             var accessToken = _tokenService.GenerateAccessToken(employee);
-            var output = _guideFillerService.FillSuccessOutput<SignInOutput>(BusinessStrings.Resources.ErrorMessagesKeys.SignInSuccess);
-            output.AccessToken = accessToken;
-            output.RefreshToken = result.refreshToken.Token;
+            var output = _guideFillerService.FillSuccessOutput<SignInOutput>(BusinessStrings.Resources.ErrorMessagesKeys.SignInSuccess); 
+            output = output with { AccessToken = accessToken, RefreshToken = result.refreshToken.Token };
             return output;
         }
         #endregion
