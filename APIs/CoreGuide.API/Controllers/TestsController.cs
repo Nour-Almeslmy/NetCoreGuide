@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System;
+using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -16,30 +17,16 @@ namespace CoreGuide.API.Controllers
     {
         private readonly AllowedFileSettings _options;
         private readonly AllowedFileSettings _optionsSnapshot;
-        private readonly ILogger<TestsController> _logger;
-        private readonly Serilog.ILogger _serilogger;
+        static HttpClient _client = new HttpClient();
 
         public TestsController(
             IOptionsSnapshot<AllowedFileSettings> optionsSnapshot,
-            IOptions<AllowedFileSettings> options,
-            ILogger<TestsController> logger)
+            IOptions<AllowedFileSettings> options)
         {
             _options = options.Value;
             _optionsSnapshot = optionsSnapshot.Value;
-            _logger = logger;
-            _serilogger = Serilog.Log.Logger.ForContext<TestsController>();
         }
-        [ServiceFilter(typeof(SerilogFilterAttribute))]
-        //[TypeFilter(typeof(SerilogFilterAttribute),Arguments = new object[] {"Action"})]
-        [HttpGet("serlilog")]
-        public IActionResult SerilogTest()
-        {
-            _logger.LogError(new NullReferenceException("Null"), "Error null");
-            _logger.LogDebug("Debug");
-            _serilogger.Error(new NullReferenceException("Serilog Null"), "Serilog Error null");
-            _serilogger.Debug("Serilog Debug");
-            return Ok();
-        }
+        
 
         [HttpGet("sync")]
         public IActionResult Sync()
@@ -194,31 +181,42 @@ namespace CoreGuide.API.Controllers
             return Ok(result);
         }
 
-        [HttpGet("log")]
-        public IActionResult Log()
+        [HttpGet("Bad")]
+        public IActionResult Bad()
         {
-            _logger.LogTrace("Trace msg\r\n");
-            _logger.LogDebug("Debug msg\r\n");
-            _logger.LogInformation("Information msg\r\n");
-            _logger.LogWarning("Warning msg\r\n");
-            return Ok();
+            var result = BadExample();
+            return Ok(result);
         }
 
-        [HttpGet("logex")]
-        public IActionResult Logex()
+        string BadExample()
         {
-            try
-            {
+            var message = BadGet().GetAwaiter().GetResult();
+            return message;
+        }
 
-                throw new AggregateException("Errooooooooooooooooooooooooooooooooooooooor",
-                    new ArgumentNullException("first inner excpetion",
-                    new ArgumentException("second exception")));
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, ex.Message);
-                return BadRequest();
-            }
+        async Task<string> BadGet()
+        {
+            var result = await _client.GetStringAsync("https://www.google.com");
+            return result;
+        }
+
+        [HttpGet("Good")]
+        public IActionResult Good()
+        {
+            var result = GoodExample();
+            return Ok(result);
+        }
+
+        string GoodExample()
+        {
+            var message = GoodGet().GetAwaiter().GetResult();
+            return message;
+        }
+
+        async Task<string> GoodGet()
+        {
+            var result = await _client.GetStringAsync("https://www.google.com").ConfigureAwait(false);
+            return result;
         }
 
     }
