@@ -1,5 +1,6 @@
 ﻿using CoreGuide.BLL.Models.Accounts.ForgetPassword.Input;
 using CoreGuide.BLL.Models.Accounts.RegisterUser.Input;
+using CoreGuide.BLL.Models.Department.Input;
 using CoreGuide.DAL.Context.Entities;
 using System;
 using System.Collections.Generic;
@@ -13,5 +14,6 @@ namespace CoreGuide.BLL.Business.Utilities.MapperService
     {
         Employee Map(RegisterUserInput input);
         Task<OTP> Map(ForgetPasswordInput input);
+        Department Map(AddDepratmentInput input);
     }
 }

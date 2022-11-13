@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using CoreGuide.BLL.Business.Manager.Accounts;
+using CoreGuide.BLL.Business.Manager.Department;
 using CoreGuide.BLL.Business.Manager.Resources;
 using CoreGuide.BLL.Business.Utilities.ContextAccessor;
 using CoreGuide.BLL.Business.Utilities.FileUploaderService;
@@ -63,6 +64,7 @@ namespace CoreGuide.BLL.Business
             #region Managers
             services.AddScoped<IAccountsManager, AccountsManager>();
             services.AddScoped<IResourcesManager, ResourcesManager>();
+            services.AddScoped<IDepartmentManager, DepartmentManager>();
 
             #endregion
 

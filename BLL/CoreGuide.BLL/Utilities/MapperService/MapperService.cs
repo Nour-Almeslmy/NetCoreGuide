@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using CoreGuide.BLL.Models.Accounts.ForgetPassword.Input;
 using CoreGuide.BLL.Models.Accounts.RegisterUser.Input;
+using CoreGuide.BLL.Models.Department.Input;
 using CoreGuide.DAL.Context.Entities;
 using CoreGuide.DAL.Repository.Respositories.Contracts;
 using CoreGuide.DAL.Repository.UnitOfWork.Contract;
@@ -56,6 +57,11 @@ namespace CoreGuide.BLL.Business.Utilities.MapperService
                 CreationDate = DateTime.Now,
                 Code = rnd.Next(100000, 999999).ToString()
             };
+        }
+
+        public Department Map(AddDepratmentInput input)
+        {
+            return _mapper.Map<Department>(input);
         }
     }
 }

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace CoreGuide.Common.GenericRepository.UnitOfWork
@@ -20,9 +21,9 @@ namespace CoreGuide.Common.GenericRepository.UnitOfWork
         {
             return _context.SaveChanges();
         }
-        public Task<int> SubmitAsync()
+        public Task<int> SubmitAsync(CancellationToken cancellationToken)
         {
-            return _context.SaveChangesAsync();
+            return _context.SaveChangesAsync(cancellationToken);
         }
     }
 }

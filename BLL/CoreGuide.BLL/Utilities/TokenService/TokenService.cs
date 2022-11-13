@@ -118,7 +118,7 @@ namespace CoreGuide.BLL.Business.Utilities.TokenService
             employeeId ??= oldRefreshToken.EmployeeId;
             var newRefreshToken = await GenerateRefreshToken(ipAddress, employeeId.Value, oldRefreshToken, cancellationToken);
             await _refreshTokenRepository.AddAsync(newRefreshToken, cancellationToken);
-            var result = await _guideUnitOfWork.SubmitAsync();
+            var result = await _guideUnitOfWork.SubmitAsync(cancellationToken);
 
             if (result > 0)
                 return (newRefreshToken, isValid);
@@ -191,7 +191,7 @@ namespace CoreGuide.BLL.Business.Utilities.TokenService
                 token.Revoked = DateTime.Now;
                 token.RevokedByIp = _utilities.GetUserIPAddress();
             }
-            await _guideUnitOfWork.SubmitAsync();
+            await _guideUnitOfWork.SubmitAsync(cancellationToken);
         }
 
         #endregion
