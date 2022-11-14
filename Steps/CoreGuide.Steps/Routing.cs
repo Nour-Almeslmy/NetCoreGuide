@@ -42,7 +42,7 @@ namespace CoreGuide.Steps
         #endregion
 
         #region References
-        /// https://docs.microsoft.com/en-us/aspnet/core/fundamentals/routing?view=aspnetcore-3.1#routing-concepts-1
+        /// https://learn.microsoft.com/en-us/aspnet/core/fundamentals/routing?view=aspnetcore-6.0 
         #endregion
     }
 }
