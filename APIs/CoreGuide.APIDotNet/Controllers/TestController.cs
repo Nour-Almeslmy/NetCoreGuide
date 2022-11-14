@@ -18,19 +18,14 @@ namespace CoreGuide.APIDotNet.Controllers
         [HttpGet]
         public IHttpActionResult Bad()
         {
-            var result = BadExample();
-            return Ok(result);
-        }
-
-        string BadExample()
-        {
             var message = BadGet().GetAwaiter().GetResult();
-            return message;
+            return Ok(message);
         }
 
         async Task<string> BadGet()
         {
-            var result = await _client.GetStringAsync("https://www.google.com");
+            var result = await _client
+                .GetStringAsync("https://www.google.com");
             return result;
         }
         #endregion
@@ -39,19 +34,15 @@ namespace CoreGuide.APIDotNet.Controllers
         [HttpGet]
         public IHttpActionResult Good()
         {
-            var result = GoodExample();
-            return Ok(result);
-        }
-
-        string GoodExample()
-        {
             var message = GoodGet().GetAwaiter().GetResult();
-            return message;
+            return Ok(message);
         }
 
         async Task<string> GoodGet()
         {
-            var result = await _client.GetStringAsync("https://www.google.com").ConfigureAwait(false);
+            var result = await _client
+                .GetStringAsync("https://www.google.com")
+                .ConfigureAwait(false);
             return result;
         }
         #endregion

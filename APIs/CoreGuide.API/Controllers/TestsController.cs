@@ -15,15 +15,9 @@ namespace CoreGuide.API.Controllers
     //[Route("api/[controller]")]
     public class TestsController : ControllerBase
     {
-        private readonly AllowedFileSettings _options;
-        private readonly AllowedFileSettings _optionsSnapshot;
 
-        public TestsController(
-            IOptionsSnapshot<AllowedFileSettings> optionsSnapshot,
-            IOptions<AllowedFileSettings> options)
+        public TestsController()
         {
-            _options = options.Value;
-            _optionsSnapshot = optionsSnapshot.Value;
         }
 
 
@@ -174,13 +168,6 @@ namespace CoreGuide.API.Controllers
             Console.WriteLine($"Thread id in the method is: {Thread.CurrentThread.ManagedThreadId}");
             Console.ForegroundColor = ConsoleColor.White;
             return Task.Delay(5000);
-        }
-
-        [HttpGet("config")]
-        public IActionResult Config()
-        {
-            var result = $"IOptions: {_options.MaximumImageSize}\r\nIOptionsSnapshot: {_optionsSnapshot.MaximumImageSize}";
-            return Ok(result);
         }
 
     }
