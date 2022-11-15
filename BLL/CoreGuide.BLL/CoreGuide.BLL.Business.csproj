@@ -1,40 +1,48 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
-    <PackageReference Include="FluentValidation.AspNetCore" Version="10.3.6" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+		<PackageReference Include="FluentValidation.AspNetCore" Version="10.3.6" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+		<PackageReference Include="System.ServiceModel.Duplex" Version="4.8.*" />
+		<PackageReference Include="System.ServiceModel.Http" Version="4.8.*" />
+		<PackageReference Include="System.ServiceModel.NetTcp" Version="4.8.*" />
+		<PackageReference Include="System.ServiceModel.Security" Version="4.8.*" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\Common\CoreGuide.Common.Entities\CoreGuide.Common.Entities.csproj" />
-    <ProjectReference Include="..\..\Common\CoreGuide.Common.GenericRepository\CoreGuide.Common.GenericRepository.csproj" />
-    <ProjectReference Include="..\..\Common\CoreGuide.Common.Utilities\CoreGuide.Common.Utilities.csproj" />
-    <ProjectReference Include="..\..\DAL\CoreGuide.DAL.Context\CoreGuide.DAL.Context.csproj" />
-    <ProjectReference Include="..\..\DAL\CoreGuide.DAL.Repository\CoreGuide.DAL.Repository.csproj" />
-    <ProjectReference Include="..\CoreGuide.Models\CoreGuide.BLL.Models.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\..\Common\CoreGuide.Common.Entities\CoreGuide.Common.Entities.csproj" />
+		<ProjectReference Include="..\..\Common\CoreGuide.Common.GenericRepository\CoreGuide.Common.GenericRepository.csproj" />
+		<ProjectReference Include="..\..\Common\CoreGuide.Common.Utilities\CoreGuide.Common.Utilities.csproj" />
+		<ProjectReference Include="..\..\DAL\CoreGuide.DAL.Context\CoreGuide.DAL.Context.csproj" >
+			<PrivateAssets>compile</PrivateAssets>
+		</ProjectReference>
+		<ProjectReference Include="..\..\DAL\CoreGuide.DAL.Repository\CoreGuide.DAL.Repository.csproj" >
+			<PrivateAssets>compile</PrivateAssets>
+		</ProjectReference>
+		<ProjectReference Include="..\CoreGuide.Models\CoreGuide.BLL.Models.csproj" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Compile Update="Resources\ErrorMessages.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>ErrorMessages.resx</DependentUpon>
-    </Compile>
-  </ItemGroup>
+	<ItemGroup>
+		<Compile Update="Resources\ErrorMessages.Designer.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>ErrorMessages.resx</DependentUpon>
+		</Compile>
+	</ItemGroup>
 
-  <ItemGroup>
-    <EmbeddedResource Update="Resources\ErrorMessages.ar.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\ErrorMessages.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>ErrorMessages.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-  </ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Update="Resources\ErrorMessages.ar.resx">
+			<Generator>PublicResXFileCodeGenerator</Generator>
+		</EmbeddedResource>
+		<EmbeddedResource Update="Resources\ErrorMessages.resx">
+			<Generator>PublicResXFileCodeGenerator</Generator>
+			<LastGenOutput>ErrorMessages.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
+	</ItemGroup>
 
 </Project>
