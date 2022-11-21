@@ -33,6 +33,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoreGuide.DAL.Context", "DA
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreGuide.APIDotNet", "APIs\CoreGuide.APIDotNet\CoreGuide.APIDotNet.csproj", "{356063FD-3EEA-4EA5-B85B-B3878F266406}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreGuide.CoreAPIs", "APIs\CoreGuide.CoreAPIs\CoreGuide.CoreAPIs.csproj", "{C75651C6-75FD-44FC-9617-942621C40864}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -79,6 +81,10 @@ Global
 		{356063FD-3EEA-4EA5-B85B-B3878F266406}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{356063FD-3EEA-4EA5-B85B-B3878F266406}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{356063FD-3EEA-4EA5-B85B-B3878F266406}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C75651C6-75FD-44FC-9617-942621C40864}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C75651C6-75FD-44FC-9617-942621C40864}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C75651C6-75FD-44FC-9617-942621C40864}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C75651C6-75FD-44FC-9617-942621C40864}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -94,6 +100,7 @@ Global
 		{F93199A5-3789-4503-93FD-B0ECC3B3681C} = {26CE967B-146B-46ED-BB11-8E0E9C6CA44D}
 		{A69E9DC3-F863-49F0-A8CE-06BB14954CC6} = {3C54FC88-C17F-430B-9442-148F5871F11A}
 		{356063FD-3EEA-4EA5-B85B-B3878F266406} = {47F323C3-AA26-4322-B6B9-1EA0D0ACE0CD}
+		{C75651C6-75FD-44FC-9617-942621C40864} = {47F323C3-AA26-4322-B6B9-1EA0D0ACE0CD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4037597C-B0DC-4F4C-8360-2F54FE66A4C1}
