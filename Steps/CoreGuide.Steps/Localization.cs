@@ -47,7 +47,7 @@ namespace CoreGuide.Steps
 
         #region Json Based Localization
         /// 1) Use the same configuration for localization
-        /// 2) Generate custom localizer class to implement IStringLocalizer. Make sure when using the file path to make the path accessible (on API project).
+        /// 2) Create custom localizer class to implement IStringLocalizer. Make sure when using the file path to make the path accessible (on API project).
         /// 3) Add class to implement IStringLocalizerFactory and return instance of your custom localizer class.
         /// 4) For better performance you can use caching by using IDistributedCache. To register the service you cofnigure "services.AddDistributedMemoryCache();" in startup
         /// 5) Use it where you want through injecting IStringLocalizer<ClassName>

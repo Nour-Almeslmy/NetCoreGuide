@@ -13,7 +13,8 @@ namespace CoreGuide.Steps
 
         #region Steps
         /// 1) Install nuget packages (Serilog.AspNetCore - Serilog.Sinks.Async - Serilog.Enrichers.ClientInfo), 
-        /// 2) Configure the source of app settings in Program.cs
+        /// 2) Add ".UseSerilog()" to host configuration to set serilog as logging provider
+        /// 3) Configure the source of app settings in Program.cs
         const string LogConfigurations = @"var configuration = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile(""appsettings.json"",false,true)
@@ -23,7 +24,7 @@ namespace CoreGuide.Steps
         Log.Logger = new LoggerConfiguration()
                 .ReadFrom.Configuration(configuration)
                 .CreateLogger();";
-        /// 3) Create Serilog section in appsettings
+        /// 4) Create Serilog section in appsettings
         #region Configure sub sections
         /// 1) Using ==> array of used packages
         /// 2) MinimumLevel ==> set default logging level

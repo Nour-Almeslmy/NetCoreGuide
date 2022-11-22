@@ -48,5 +48,13 @@ app.Map("/Return", app => app.Run(async (ctx) =>
 app.MapControllers();
 
 // Filters execution
+app.Use(async (ctx, next) =>
+{
+    Console.WriteLine("Use 2 in");
+    Console.WriteLine(ctx.Request.Method);
+    await next();
+    Console.WriteLine("Use 2 out");
+    Console.WriteLine(ctx.Response.ToString());
+});
 
 app.Run();
