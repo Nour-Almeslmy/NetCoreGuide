@@ -55,8 +55,8 @@ namespace CoreGuide.API
                     var allowedOrigins = Configuration.GetSection(APIStrings.ConfigurationsSections.AllowedOrigins).Get<string[]>();
                     policy
                         .WithOrigins(allowedOrigins)
-                        .AllowAnyHeader()
-                        .AllowAnyMethod();
+                        .AllowAnyHeader()   //.AllowAnyHeader()
+                        .AllowAnyMethod();  //.AllowAnyMethod()
                 });
             });
 
