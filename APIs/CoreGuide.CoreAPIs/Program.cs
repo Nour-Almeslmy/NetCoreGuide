@@ -1,4 +1,22 @@
+using Serilog;
+
 var builder = WebApplication.CreateBuilder(args);
+
+#region Configure serilog
+/*builder.Host.UseSerilog();
+
+var configuration = new ConfigurationBuilder()
+.SetBasePath(Directory.GetCurrentDirectory())
+.AddJsonFile("appsettings.json", false, true)
+.AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production"}.json", true, true)
+.Build();
+
+Log.Logger = new LoggerConfiguration()
+.ReadFrom.Configuration(configuration)
+.Enrich.FromLogContext()
+.CreateLogger();*/
+#endregion
+
 
 // Add services to the container.
 

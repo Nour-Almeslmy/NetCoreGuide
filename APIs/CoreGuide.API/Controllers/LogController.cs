@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Serilog;
 using System;
 
 namespace CoreGuide.API.Controllers
@@ -18,21 +19,22 @@ namespace CoreGuide.API.Controllers
             ILogger<LogController> logger)
         {
             _logger = logger;
-            _serilogger = Serilog.Log.Logger.ForContext<LogController>();
+            _serilogger = Serilog.Log.Logger.ForContext<LogController>(Serilog.Events.LogEventLevel.Information, "Filter", this);
         }
 
-        [HttpGet("log")]
+        [HttpGet("logger")]
         public IActionResult Log()
         {
             _logger.LogTrace("Trace msg\r\n");
             _logger.LogDebug("Debug msg\r\n");
             _logger.LogInformation("Information msg\r\n");
+            _logger.LogError(new NullReferenceException("Null"), "Error null");
             _logger.LogWarning("Warning msg\r\n");
             return Ok();
         }
 
-        [HttpGet("logex")]
-        public IActionResult Logex()
+        [HttpGet("logEx")]
+        public IActionResult LogEx()
         {
             try
             {
@@ -53,8 +55,6 @@ namespace CoreGuide.API.Controllers
         [HttpGet("serlilog")]
         public IActionResult SerilogTest()
         {
-            _logger.LogError(new NullReferenceException("Null"), "Error null");
-            _logger.LogDebug("Debug");
             _serilogger.Error(new NullReferenceException("Serilog Null"), "Serilog Error null");
             _serilogger.Debug("Serilog Debug");
             return Ok();
