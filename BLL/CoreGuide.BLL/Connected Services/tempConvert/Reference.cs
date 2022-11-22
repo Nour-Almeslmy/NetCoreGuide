@@ -41,7 +41,7 @@ namespace tempConvert
         /// <param name="serviceEndpoint">The endpoint to configure</param>
         /// <param name="clientCredentials">The client credentials</param>
         static partial void ConfigureEndpoint(System.ServiceModel.Description.ServiceEndpoint serviceEndpoint, System.ServiceModel.Description.ClientCredentials clientCredentials);
-        
+
         public TempConvertSoapClient(EndpointConfiguration endpointConfiguration) : 
                 base(TempConvertSoapClient.GetBindingForEndpoint(endpointConfiguration), TempConvertSoapClient.GetEndpointAddress(endpointConfiguration))
         {
@@ -93,6 +93,9 @@ namespace tempConvert
             if ((endpointConfiguration == EndpointConfiguration.TempConvertSoap))
             {
                 System.ServiceModel.BasicHttpBinding result = new System.ServiceModel.BasicHttpBinding();
+                /// Added for HTTPS calls
+                result.Security.Mode = System.ServiceModel.BasicHttpSecurityMode.Transport;
+                /// 
                 result.MaxBufferSize = int.MaxValue;
                 result.ReaderQuotas = System.Xml.XmlDictionaryReaderQuotas.Max;
                 result.MaxReceivedMessageSize = int.MaxValue;

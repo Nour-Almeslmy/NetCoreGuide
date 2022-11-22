@@ -11,6 +11,7 @@
             public const string RefreshTokenSettings = "RefreshTokenSettings";
             public const string AllowedOrigins = "AllowedOrigins";
             public const string Localization = "LocalizationSettings";
+            public const string TempConvertService = "TempConvertServiceSettings";
         }
     }
 }

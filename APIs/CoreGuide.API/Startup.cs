@@ -117,6 +117,7 @@ namespace CoreGuide.API
             services.Configure<AllowedFileSettings>(Configuration.GetSection(APIStrings.ConfigurationsSections.AllowedFileSettings));
             services.Configure<AccessTokenSettings>(Configuration.GetSection(APIStrings.ConfigurationsSections.AccessTokenSettings));
             services.Configure<RefreshTokenSettings>(Configuration.GetSection(APIStrings.ConfigurationsSections.RefreshTokenSettings));
+            services.Configure<TempConvertServiceSettings>(Configuration.GetSection(APIStrings.ConfigurationsSections.TempConvertService));
             #endregion
 
             services.AddLocalizationSettings(Configuration);

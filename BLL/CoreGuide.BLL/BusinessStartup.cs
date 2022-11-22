@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using CoreGuide.BLL.Business.Connected_Services.tempConvert;
 using CoreGuide.BLL.Business.Manager.Accounts;
 using CoreGuide.BLL.Business.Manager.Department;
 using CoreGuide.BLL.Business.Manager.Resources;
@@ -47,6 +48,7 @@ namespace CoreGuide.BLL.Business
             services.AddScoped<IContextAccessor, ContextAccessor>();
             services.AddScoped<IFileUploaderService, OnDiskFileUploaderService>();
             services.AddSingleton<IStringLocalizerFactory, JsonStringLocalizerFactory>();
+            services.AddScoped<ITempService, TempService>();
             #endregion
 
             #region Validators
