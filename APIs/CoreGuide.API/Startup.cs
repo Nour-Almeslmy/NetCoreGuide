@@ -50,6 +50,8 @@ namespace CoreGuide.API
             });
             services.AddCors(opts =>
             {
+                opts.AddPolicy("Test", policy => policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyMethod());
+                
                 opts.AddDefaultPolicy(policy =>
                 {
                     var allowedOrigins = Configuration.GetSection(APIStrings.ConfigurationsSections.AllowedOrigins).Get<string[]>();
@@ -58,6 +60,7 @@ namespace CoreGuide.API
                         .AllowAnyHeader()   //.AllowAnyHeader()
                         .AllowAnyMethod();  //.AllowAnyMethod()
                 });
+
             });
 
             services.AddSwaggerGen(options =>
@@ -166,6 +169,7 @@ namespace CoreGuide.API
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                //.RequireCors("Test");
                 //endpoints.MapControllerRoute("default", "api/{controller}/{action}/{id?}");
             });
 
