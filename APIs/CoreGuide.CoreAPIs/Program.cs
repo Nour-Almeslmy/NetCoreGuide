@@ -76,3 +76,34 @@ app.Use(async (ctx, next) =>
 });
 
 app.Run();
+
+#region Generic host
+/*
+ var hostBuilder = Host.CreateDefaultBuilder(args)
+    .ConfigureServices(services => 
+    {
+        services.AddRazorPages();
+    })
+    .ConfigureWebHostDefaults(webBuilder =>
+    {
+        webBuilder.Configure((ctx, app) => 
+        {
+            if (ctx.HostingEnvironment.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+
+            app.UseStaticFiles();
+            app.UseRouting();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapGet("/", () => "Hello World!");
+                endpoints.MapRazorPages();
+            });
+        });
+    }); 
+
+hostBuilder.Build().Run();
+ */
+#endregion

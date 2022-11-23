@@ -15,6 +15,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 
@@ -69,7 +70,19 @@ namespace CoreGuide.API
                     new OpenApiInfo
                     {
                         Title = "CoreGuide.API",
-                        Version = "v1"
+                        Version = "v1",
+                        Description = "An ASP.NET Core Web API Guide.",
+                        TermsOfService = new Uri("https://example.com/terms"),
+                        Contact = new OpenApiContact
+                        {
+                            Name = "Example Contact",
+                            Url = new Uri("https://example.com/contact")
+                        },
+                        License = new OpenApiLicense
+                        {
+                            Name = "Example License",
+                            Url = new Uri("https://example.com/license")
+                        }
                     });
                 // Set the comments path for the Swagger JSON and UI.
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
@@ -79,33 +92,47 @@ namespace CoreGuide.API
                 // Adds "(Auth)" to the summary so that you can see which endpoints have Authorization
                 options.OperationFilter<AppendAuthorizeToSummaryOperationFilter>();
 
-                // add Security information to each operation for OAuth2
+                // add Security information to each operation for OAuth2, which renders in Swagger-UI as a padlock next to the operation
                 options.OperationFilter<SecurityRequirementsOperationFilter>();
 
+                // To show Authorize button
                 options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
                 {
-                    Description = "Standard Authorization header using the Bearer scheme. Example: \"bearer {token}\"",
+                    Description = "Standard Authorization header using the Bearer scheme. Example: `JWT token`",
+                    In = ParameterLocation.Header,
+                    BearerFormat = "JWT",
+                    Scheme = "bearer",
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.Http
+                });
+
+                // to add customer api key in customer header
+                /* options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
+                {
+                    Description = "Standard Authorization header using the Bearer scheme. Example: `Bearer {JWT token}`",
                     In = ParameterLocation.Header,
                     BearerFormat = "JWT",
                     Scheme = "bearer",
                     Name = "Authorization",
                     Type = SecuritySchemeType.ApiKey
-                });
+                });*/
+
 
                 OpenApiSecurityScheme securityScheme = new OpenApiSecurityScheme()
                 {
                     Reference = new OpenApiReference()
                     {
-                        Id = "jwt_auth",
+                        Id = "bearer",
                         Type = ReferenceType.SecurityScheme
                     }
                 };
                 OpenApiSecurityRequirement securityRequirements = new OpenApiSecurityRequirement()
                 {
                          {
-                            securityScheme, new string[] { }
+                            securityScheme, new List<string>()
                          },
                 };
+                // The AddSecurityRequirement extension method will add an authorization header to each endpoint when the request is sent.
                 options.AddSecurityRequirement(securityRequirements);
             });
 
@@ -157,13 +184,16 @@ namespace CoreGuide.API
             #endregion
 
             app.UseHttpsRedirection();
+
             app.UseStaticFiles();
+
             var requestLocalizationOptions = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>();
             app.UseRequestLocalization(requestLocalizationOptions.Value);
             app.UseRouting();
-            app.UseCors();
-            app.UseAuthentication();
 
+            app.UseCors();
+
+            app.UseAuthentication();
             app.UseAuthorization();
            
             app.UseEndpoints(endpoints =>

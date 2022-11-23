@@ -12,7 +12,9 @@ namespace CoreGuide.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Produces("application/json")]
     [Authorize]
+
     public class AccountsController : ControllerBase
     {
         private readonly IAccountsManager _accountsManager;
@@ -27,13 +29,36 @@ namespace CoreGuide.API.Controllers
         /// <param name="input">RegisterUserInput</param>
         /// <returns></returns>
         [HttpPost("Register")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [AllowAnonymous]
         public async Task<IActionResult> Register([FromForm] RegisterUserInput input)
         {
             var output = await _accountsManager.RegisterEmployee(input);
-            return Ok(output);
+            return Created("/auth",output);
         }
+
+        /// <summary>
+        /// User Sign in
+        /// </summary>
+        /// <param name="input"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>User access and refresh tokens</returns>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     POST
+        ///     {
+        ///        "UserName": "waleed.hegazy@orange.com",
+        ///        "Password": "Orange@123"
+        ///     }
+        ///
+        /// </remarks>
+        /// <response code="200">Returns new access and refresh tokens</response>
+        /// <response code="400">If the user is not found</response>
         [HttpPost("SignIn")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [AllowAnonymous]
         //[CoreGuide.API.Utilities.Filters.ConsoleLogFilter]
         public async Task<IActionResult> SignIn([FromBody] SignInInput input, CancellationToken cancellationToken)
