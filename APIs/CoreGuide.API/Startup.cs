@@ -98,7 +98,7 @@ namespace CoreGuide.API
                 // To show Authorize button
                 options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
                 {
-                    Description = "Standard Authorization header using the Bearer scheme. Example: `JWT token`",
+                    Description = "Standard Authorization header using the Bearer scheme. Example: `bearer {token}`",
                     In = ParameterLocation.Header,
                     BearerFormat = "JWT",
                     Scheme = "bearer",

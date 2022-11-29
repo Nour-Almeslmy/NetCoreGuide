@@ -28,13 +28,14 @@ namespace CoreGuide.Steps
         #region Configure sub sections
         /// 1) Using ==> array of used packages
         /// 2) MinimumLevel ==> set default logging level
-        /// 3) Override ==> What to write using serilog from other sources.
+        /// 3) Override ==> What to write using serilog from other sources (Namespaces).
         /// 4) WriteTo ==> configure the logging target  
         /// 5) "Write:Async" or "Name":"Async" in "WriteTo" section to use asyncronous logging
         /// 6) Args, configure in ["Name":"Async"] ==> used in async logging to configure logging targets
         /// 7) Name ==> write the target type ex: console, file.
         /// 8) Enrich ==> array of enrichers
         /// 9) Properties ==> json of properties
+        /// 10) Filters ==> Added to filter what to log
         #endregion
         #endregion
 
@@ -57,6 +58,7 @@ namespace CoreGuide.Steps
         /// https://github.com/serilog/serilog-sinks-file
         /// https://github.com/serilog/serilog/wiki/Formatting-Output
         /// https://github.com/serilog/serilog/wiki/Enrichment
+        /// https://github.com/serilog/serilog-settings-configuration
         /// 
         #endregion
     }

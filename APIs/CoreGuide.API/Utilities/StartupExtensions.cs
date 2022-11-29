@@ -25,6 +25,13 @@ namespace CoreGuide.API.Utilities
                 options.SupportedCultures = supportedCultures;
                 options.SupportedUICultures = supportedCultures;
                 options.RequestCultureProviders = new[] { new AcceptLanguageHeaderRequestCultureProvider() };
+                /*options.RequestCultureProviders = new[] { new CustomRequestCultureProvider(async context =>
+                {
+                    var value = context.Request.Headers["lang"].ToString();
+                    return new ProviderCultureResult(value);    
+                }
+                ) 
+                };*/
             });
         }
     }

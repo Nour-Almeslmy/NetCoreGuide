@@ -19,7 +19,8 @@ namespace CoreGuide.API.Controllers
             ILogger<LogController> logger)
         {
             _logger = logger;
-            _serilogger = Serilog.Log.Logger.ForContext<LogController>(Serilog.Events.LogEventLevel.Information, "Filter", this);
+            //_serilogger = Serilog.Log.Logger.ForContext<LogController>(Serilog.Events.LogEventLevel.Information, "Filter",this);
+            _serilogger = Serilog.Log.Logger.ForContext<LogController>().ForContext("Console","True");
         }
 
         [HttpGet("logger")]

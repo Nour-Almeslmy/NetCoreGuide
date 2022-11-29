@@ -36,7 +36,7 @@ namespace CoreGuide.Common.Utilities
                         IssuerSigningKey = GetSecurityKey(accessTokenSettings.SecretKey),
                         ValidIssuer = accessTokenSettings.Issuer,
                         ValidAudience = accessTokenSettings.Audience,
-                        ClockSkew = TimeSpan.Zero,
+                        ClockSkew = TimeSpan.Zero
                     };
                 });
 

@@ -1,7 +1,9 @@
 using Serilog;
 
-var builder = WebApplication.CreateBuilder(args);
-
+var builder = WebApplication.CreateBuilder(new WebApplicationOptions()
+{
+    WebRootPath = "Files"
+});
 #region Configure serilog
 /*builder.Host.UseSerilog();
 
@@ -21,6 +23,7 @@ Log.Logger = new LoggerConfiguration()
 // Add services to the container.
 
 builder.Services.AddControllers();
+builder.Services.AddHttpContextAccessor();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -39,33 +42,34 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+#region Custom middlewares
 /*app.Use(async (ctx, next) =>
 {
-    Console.WriteLine("Use 1 in");
-    Console.WriteLine(ctx.Request.Method);
-    await next();
-    Console.WriteLine("Use 1 out");
-    Console.WriteLine(ctx.Response.ToString());
+Console.WriteLine("Use 1 in");
+Console.WriteLine(ctx.Request.Method);
+await next();
+Console.WriteLine("Use 1 out");
+Console.WriteLine(ctx.Response.ToString());
 });
 
 app.Use(async (ctx, next) =>
 {
-    Console.WriteLine("Use 2 in");
-    Console.WriteLine(ctx.Request.Method);
-    await next();
-    Console.WriteLine("Use 2 out");
-    Console.WriteLine(ctx.Response.ToString());
+Console.WriteLine("Use 2 in");
+Console.WriteLine(ctx.Request.Method);
+await next();
+Console.WriteLine("Use 2 out");
+Console.WriteLine(ctx.Response.ToString());
 });
 
 app.Map("/Return", app => app.Run(async (ctx) =>
- {
-     Console.WriteLine("Run in");
-     await ctx.Response.WriteAsync("Short circiut");
- }));*/
+{
+Console.WriteLine("Run in");
+await ctx.Response.WriteAsync("Short circiut");
+}));*/ 
+#endregion
 
-app.MapControllers();
+app.MapControllerRoute("default", "api/{controller=Home}/{action=Index}/{id?}");
 
-// Filters execution
 app.Use(async (ctx, next) =>
 {
     Console.WriteLine("Use 2 in");
