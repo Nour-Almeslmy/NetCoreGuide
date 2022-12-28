@@ -136,5 +136,36 @@ namespace CoreGuide.API.Controllers
         }
         #endregion
 
+        #region Threadsafe
+        [HttpGet("ThreadUnsafe")]
+        public async Task<IActionResult> Unsafe()
+        {
+            await ThreadSafety.UnsafeExec();
+            return Ok();
+        }
+
+        [HttpGet("ThreadUnsafe2")]
+        public async Task<IActionResult> Unsafe2()
+        {
+            await ThreadSafety.UnsafeExec();
+            return Ok();
+        }
+
+
+        static class ThreadSafety
+        {
+            static int _val1 = 1, _val2 = 2;
+            static readonly object _lock = new();
+            public static async Task UnsafeExec()
+            {
+                if (_val2 != 0)
+                {
+                    await Task.Delay(7000);
+                    Console.WriteLine(_val2 / _val2);
+                }
+                _val2 = 0;
+            }
+        }
+        #endregion
     }
 }
